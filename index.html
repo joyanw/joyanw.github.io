@@ -41,7 +41,7 @@
       <button class="btn" id="reset-bounds">指定地图显示范围</button>
     </div>
     <div class="input-item">
-      <button class="btn" id="sate-id" onclick="toggle()">卫星</button><!-- 占位符，控制间距 -->
+      <button class="btn" id="sate-id">卫星</button><!-- 占位符，控制间距 -->
       <p>&ensp;</p>
       <button class="btn" id="build-id" onclick="toggle()">建筑</button><!-- 占位符，控制间距 -->
       <p>&ensp;</p>
@@ -163,7 +163,7 @@
 
     var isVisibleSate = false; //默认不载入卫星图
 
-    AMap.event.addDomListener(document.getElementById('sate-id'), 'click', function toggle() {
+    AMap.event.addDomListener(document.getElementById('sate-id'), 'click', function() {
       if (isVisibleSate) {
         satellite.hide();
         isVisibleSate = false;
