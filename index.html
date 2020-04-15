@@ -116,7 +116,7 @@
             id: 'tile', //图层id，需唯一
             name: '标准图', //显示名称，html
             layer: new AMap.TileLayer({
-              zooms: [3, 20],
+              zooms: [10, 20],
             })
           },
           //第二层基础图层
@@ -124,7 +124,7 @@
             id: 'satellite',
             name: '卫星图',
             layer: new AMap.TileLayer.Satellite({
-              zooms: [3, 20],
+              zooms: [10, 20],
             })
           }
         ],
@@ -137,7 +137,7 @@
             id: 'buildings',
             name: '建筑',
             layer: new AMap.Buildings({
-              zooms: [10, 20],
+              zooms: [15, 20],
               //opacity: 0.8, //建筑透明度
               //heightFactor: 2 //N倍于默认高度，3D下有效
             })
