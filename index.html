@@ -1,44 +1,240 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en" dir="ltr">
+
 <head>
-<title>a test html page</title>
-<style>
-.city {
-  margin:0 auto;
-  padding: 15px;
-  width: 300px;
-  height: 300px;
-  border: 1px solid black;
-  } 
-  
-body {
-  color:white;
-  text-align:center
-  }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+  <title>正式页面</title>
+  <style>
+    html,
+    body,
+
+    #container {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .lnglat {
+      color: #0288d1;
+    }
+
+    #map-features .input-item {
+      height: 2rem;
+    }
+  </style>
+
+
 </head>
 
-<body align ="center" bgcolor ="DimGray">
-  
-  <h1>a test html page</h1>
-  <h2>Resize this responsive page!</h2>
-  <br>
-  
-  <div class="city">
-    <h2>London</h2>
-    <p>London is the capital city of England.</p>
-    <p>It is the most populous city in the United Kingdom,with a metropolitan area of over 13 million inhabitants.</p>
-  </div>
-  
-  <div class="city">
-    <h2>Paris</h2>
-    <p>Paris is the capital and most populous city of France.</p>
-  </div>
-  
-  <div class="city">
-    <h2>Tokyo</h2>
-    <p>Tokyo is the capital of Japan, the center of the Greater Tokyo Area,and the most populous metropolitan area in the world.</p>
+<body>
+  <!-- 地图容器 -->
+  <div id="container"></div>
+
+  <!-- 信息卡 -->
+
+  <!-- 点击选卡 -->
+  <div class="input-card" style="width: auto">
+    <h4>控制地图显示范围</h4>
+    <div class="input-item">
+      <button class="btn" id="piexBtn">平移像素值：(50,100)</button>
+    </div>
+    <div class="input-item">
+      <button class="btn" id="pantoBtn">地图中心点平移至：(116.405467,39.907761)</button>
+    </div>
+    <div class="input-item">
+      <button class="btn" id="reset-bounds">指定地图显示范围</button>
+    </div>
+    <div class="input-item">
+      <button class="btn" id="sate-id" onclick="toggle()">卫星</button><!-- 占位符，控制间距 -->
+      <p>&ensp;</p>
+      <button class="btn" id="build-id" onclick="toggle()">建筑</button><!-- 占位符，控制间距 -->
+      <p>&ensp;</p>
+      <button class="btn" id="road-id" onclick="toggle()">路网</button><!-- 占位符，控制间距 -->
+      <p>&ensp;</p>
+      <button class="btn" id="traffic-id" onclick="toggle()">实时交通</button><!-- 占位符，控制间距 -->
+      <p>&ensp;</p>
+    </div>
   </div>
 
+  <!-- 加载地图JSAPI脚本 -->
+  <script src="https://webapi.amap.com/maps?v=1.4.15&key=5d734c342da6acb3de3ebdc017ca2e32"></script>
+  <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+  <!-- UI组件库 1.0 -->
+  <script src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+
+  <!-- 定义脚本 -->
+  <script>
+    var map = new AMap.Map('container', {
+      zoom: 17, //初始化地图层级
+      center: [116.397428, 39.90923], //初始化地图中心点
+      pitch: 0, //仰角
+      rotation: 0, //旋转视角
+      expandZoomRange: true, //缩放控制
+      zooms: [10, 20],
+      viewMode: '3D', //开启3D视图,默认为关闭
+      buildingAnimation: true, //楼块出现是否带动画
+      showIndoorMap: false, // 是否在有矢量底图的时候自动展示室内地图，PC默认true,移动端默认false
+      doubleClickZoom: true, // 地图是否可通过双击鼠标放大地图，默认为true
+      resizeEnable: true, //是否监控地图容器尺寸变化，默认值为false
+      rotateEnable: true,
+      pitchEnable: true,
+      //zoomEnable: true, //地图是否可缩放，默认值为true
+      features: ['bg', 'road', 'point'],
+    });
+
+    //载入UI控件，参考：https://lbs.amap.com/api/javascript-api/reference-amap-ui/control/basiccontrol
+    AMapUI.loadUI(['control/BasicControl'], function(BasicControl) {
+      //图层切换控件
+      map.addControl(new BasicControl.LayerSwitcher({
+        theme: 'light',
+        position: 'lt', //位置
+        //自定义基础图层
+        baseLayers: [
+          //第一层基础图层
+          {
+            id: 'tile', //图层id，需唯一
+            name: '标准图', //显示名称，html
+            layer: new AMap.TileLayer()
+          },
+          //第二层基础图层
+          {
+            enable: true,
+            id: 'satellite',
+            name: '卫星图',
+            layer: new AMap.TileLayer.Satellite()
+          }
+        ],
+
+        //自定义覆盖图层
+        overlayLayers: [
+          //第一层覆盖图层
+          {
+            enable: true,
+            id: 'traffic',
+            name: '图层C',
+            layer: new AMap.TileLayer.Traffic()
+          },
+
+          //第三层覆盖图层
+          {
+            id: 'buildings',
+            name: '建筑',
+            layer: new AMap.Buildings()
+          }
+        ]
+      }));
+    });
+    //其他插件载入
+    AMap.plugin([
+        //'AMap.ToolBar',//工具条
+        //'AMap.Scale',//比例尺
+        //'AMap.OverView',//鹰眼控件
+        //'AMap.MapType',//卫星切换控件
+        //'AMap.Geolocation',//定位控件
+        //'AMap.ControlBar', //3D 罗盘控制
+      ],
+      function() {
+        //其他控件添加
+        //map.addControl(new AMap.ToolBar());//工具条
+        //map.addControl(new AMap.Scale());//比例尺
+        //map.addControl(new AMap.OverView({isOpen:false}));//鹰眼
+        //map.addControl(new AMap.MapType());//图层切换
+        //map.addControl(new AMap.Geolocation());//定位
+        //map.addControl(new AMap.ControlBar({ // 添加 3D 罗盘控制
+        //showZoomBar: false, //缩放按钮
+        //showControlButton: true, //罗盘
+        //position: { //位置
+        //right: '10px',
+        //top: '10px',
+        //}
+        //}));
+      });
+
+    //点击选卡
+    AMap.event.addDomListener(document.getElementById('piexBtn'), 'click', function() {
+      map.panBy(50, 100);
+    }); //平移到，绑定按钮事件
+    AMap.event.addDomListener(document.getElementById('pantoBtn'), 'click', function() {
+      map.panTo([116.405467, 39.907761]);
+    }); //移动到，绑定按钮事件
+    AMap.event.addDomListener(document.getElementById('reset-bounds'), 'click', function() {
+      var mybounds = new AMap.Bounds([116.109266, 39.948756], [116.104835, 39.94503]);
+      map.setBounds(mybounds);
+    }); //缩放到，绑定按钮事件，获取视野：https://lbs.amap.com/api/javascript-api/example/map/map-bounds
+
+    //卫星图层开关
+    var satellite = new AMap.TileLayer.Satellite();
+
+    var isVisibleSate = false; //默认不载入卫星图
+
+    AMap.event.addDomListener(document.getElementById('sate-id'), 'click', function toggle() {
+      if (isVisibleSate) {
+        satellite.hide();
+        isVisibleSate = false;
+      } else {
+        satellite.setMap(map);
+        satellite.show();
+        isVisibleSate = true;
+      }
+    });
+
+    //建筑图层开关
+    var buildings = new AMap.Buildings({
+      zooms: [10, 20],
+      opacity: 0.9 //建筑透明度
+    });
+    buildings.setMap(map); //载入建筑
+
+    var isVisibleBuild = true; //默认载入建筑
+
+    AMap.event.addDomListener(document.getElementById('build-id'), 'click', function toggle() {
+      if (isVisibleBuild) {
+        buildings.hide();
+        isVisibleBuild = false;
+      } else {
+        buildings.show();
+        isVisibleBuild = true;
+      }
+    });
+
+    //路网图层开关
+    var roadnet = new AMap.TileLayer.RoadNet();
+
+    var isVisibleRoad = false; //默认不载入路网
+
+    AMap.event.addDomListener(document.getElementById('road-id'), 'click', function toggle() {
+      if (isVisibleRoad) {
+        roadnet.hide();
+        isVisibleRoad = false;
+      } else {
+        roadnet.setMap(map);
+        roadnet.show();
+        isVisibleRoad = true;
+      }
+    });
+
+    //实时交通情况开关
+    var traffic = new AMap.TileLayer.Traffic({
+      zIndex: 10
+    });
+
+    var isVisibleTraf = false; //默认不载入实时交通情况
+
+    AMap.event.addDomListener(document.getElementById('traffic-id'), 'click', function toggle() {
+      if (isVisibleTraf) {
+        traffic.hide();
+        isVisibleTraf = false;
+      } else {
+        traffic.setMap(map);
+        traffic.show();
+        isVisibleTraf = true;
+      }
+    });
+  </script>
 </body>
+
 </html>
