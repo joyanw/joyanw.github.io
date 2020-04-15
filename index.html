@@ -17,14 +17,6 @@
       margin: 0px;
       padding: 0px;
     }
-
-    .lnglat {
-      color: #0288d1;
-    }
-
-    #map-features .input-item {
-      height: 2rem;
-    }
   </style>
 
 
@@ -119,7 +111,7 @@
             layer: new AMap.TileLayer.Traffic()
           },
 
-          //第三层覆盖图层
+          //第二层覆盖图层
           {
             id: 'buildings',
             name: '建筑',
@@ -187,15 +179,16 @@
       zooms: [10, 20],
       opacity: 0.9 //建筑透明度
     });
-    buildings.setMap(map); //载入建筑
 
-    var isVisibleBuild = true; //默认载入建筑
+
+    var isVisibleBuild = false; //默认载入建筑
 
     AMap.event.addDomListener(document.getElementById('build-id'), 'click', function toggle() {
       if (isVisibleBuild) {
         buildings.hide();
         isVisibleBuild = false;
       } else {
+        buildings.setMap(map); //载入建筑
         buildings.show();
         isVisibleBuild = true;
       }
