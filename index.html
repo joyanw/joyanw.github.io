@@ -60,26 +60,6 @@
       box-shadow: none;
     }
 
-    .card {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      word-wrap: break-word;
-      background-color: #fff;
-      background-clip: border-box;
-      border-radius: .25rem;
-      width: 22rem;
-      border-width: 0;
-      border-radius: 0.4rem;
-      box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      padding: 0.75rem 1.25rem;
-    }
-
     /* 弹出选卡 */
     .input-card-rs {
       display: flex;
@@ -94,8 +74,9 @@
       border-radius: 0.4rem;
       box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
       position: fixed;
-      bottom: 1rem;
-      right: 1rem;
+      /* 菜单相对页面位置 */
+      bottom: 5rem;
+      right: 2rem;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
       padding: 0.75rem 1.25rem;
@@ -117,11 +98,24 @@
       border-radius: 10rem;
       box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
       position: fixed;
-      bottom: 1rem;
-      right: 1rem;
+      /* 菜单按钮相对页面位置 */
+      bottom: 2rem;
+      right: 2rem;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
-      padding:0rem;
+      padding: 0rem;
+    }
+
+    .input-item2 {
+      position: relative;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -ms-flex-align: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
     }
   </style>
 
@@ -132,29 +126,29 @@
   <div id="container"></div>
 
   <!-- 信息卡 -->
-  <div class="card">
-    <!-- 点击选卡 -->
-    <div class="input-card-rs" id="show-rs" style="width: auto">
-      <h4>控制地图显示范围</h4>
-      <div class="input-item">
-        <button class="btn" id="piexBtn">平移像素值：(50,100)</button>
-      </div>
-      <div class="input-item">
-        <button class="btn" id="pantoBtn">地图中心点平移至：(116.405467,39.907761)</button>
-      </div>
-      <div class="input-item">
-        <button class="btn" id="reset-bounds">指定地图显示范围</button>
-      </div>
+
+  <!-- 点击选卡 -->
+  <div class="input-card-rs" id="show-rs" style="width: auto">
+    <h4>控制地图显示范围</h4>
+    <div class="input-item">
+      <button class="btn" id="piexBtn">平移像素值：(50,100)</button>
     </div>
-    <!-- 菜单按钮 -->
-    <div class="input-card-btn" style="width: auto">
-      <div class="input-item">
-        <button class="btn-show" id="show-btn">
-          <p>&ensp;菜单&ensp;</p>
-        </button>
-      </div>
+    <div class="input-item">
+      <button class="btn" id="pantoBtn">地图中心点平移至：(116.405467,39.907761)</button>
+    </div>
+    <div class="input-item">
+      <button class="btn" id="reset-bounds">指定地图显示范围</button>
     </div>
   </div>
+  <!-- 菜单按钮 -->
+  <div class="input-card-btn" style="width: auto">
+    <div class="input-item2">
+      <button class="btn-show" id="show-btn">
+        <p>&ensp;菜单&ensp;</p>
+      </button>
+    </div>
+  </div>
+
 
   <!-- 加载地图JSAPI脚本 -->
   <script src="https://webapi.amap.com/maps?v=1.4.15&key=5d734c342da6acb3de3ebdc017ca2e32"></script>
