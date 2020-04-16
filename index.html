@@ -21,6 +21,52 @@
     .amap-ui-control-layer .iconfont {
       margin-right: 0px !important
     }
+
+    .btn2 {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      background-color: transparent;
+      background-image: none;
+      color: #25A5F7;
+      border-color: #25A5F7;
+      padding: .25rem .5rem;
+      line-height: 1.5;
+      border-radius: 1rem;
+      -webkit-appearance: button;
+      cursor: pointer;
+    }
+
+    .input-card2 {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border-radius: .25rem;
+      width: 22rem;
+      border-width: 0;
+      border-radius: 0.4rem;
+      box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      padding: 0.75rem 1.25rem;
+      display: none;
+      /*默认不显示*/
+    }
+
   </style>
 
 </head>
@@ -32,7 +78,8 @@
   <!-- 信息卡 -->
 
   <!-- 点击选卡 -->
-  <div class="input-card" style="width: auto">
+
+  <div class="input-card2" id="show-rs" style="width: auto">
     <h4>控制地图显示范围</h4>
     <div class="input-item">
       <button class="btn" id="piexBtn">平移像素值：(50,100)</button>
@@ -42,6 +89,14 @@
     </div>
     <div class="input-item">
       <button class="btn" id="reset-bounds">指定地图显示范围</button>
+    </div>
+  </div>
+
+  <div class="input-card" style="width: auto">
+    <div class="input-item">
+      <button class="btn" id="show-btn">
+        <p>&ensp;菜单&ensp;</p>
+      </button>
     </div>
   </div>
 
@@ -104,7 +159,10 @@
       //图层切换控件
       map.addControl(new BasicControl.LayerSwitcher({
         theme: 'light',
-        position: "lt",//图标位置
+        position: {
+          left: '10px',
+          top: '10px',
+        }, //图标位置
         //自定义基础图层
         baseLayers: [
           //第一层基础图层
@@ -113,7 +171,7 @@
             id: 'tile', //图层id，需唯一
             name: '标准图', //显示名称，html
             layer: new AMap.TileLayer({
-              zooms: [10, 20],
+              zooms: [3, 20],
             })
           },
           //第二层基础图层
@@ -121,7 +179,7 @@
             id: 'satellite',
             name: '卫星图',
             layer: new AMap.TileLayer.Satellite({
-              zooms: [10, 20],
+              zooms: [3, 20],
             })
           }
         ],
@@ -165,9 +223,24 @@
     });
 
     //点击选卡
-    AMap.event.addDomListener(document.getElementById('piexBtn'), 'click', function() {
-      map.panBy(50, 100);
+    var show = false;
+    AMap.event.addDomListener(document.getElementById('show-btn'), 'click', function() {
+      if (show) {
+        hide();
+        show = false;
+      } else {
+        show();
+        show = true;
+      };
+
     }); //平移到，绑定按钮事件
+    window.onload = function() {
+      var btn = document.getElementById('show-btn');
+      var oCon = document.getElementById('show-rs').style;
+      btn.onclick = function() {
+        oCon.display = oCon.display == 'block' ? 'none' : 'block';
+      }
+    };
     AMap.event.addDomListener(document.getElementById('pantoBtn'), 'click', function() {
       map.panTo([116.405467, 39.907761]);
     }); //移动到，绑定按钮事件
