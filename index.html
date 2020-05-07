@@ -8,16 +8,6 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
   <title>Joyan</title>
 
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?630a3bc130d157e9583cbe17e6e49cdc";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-  
   <style>
     body {
       background-color: #2980b9;
@@ -123,6 +113,17 @@
       }
     }
   </style>
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?630a3bc130d157e9583cbe17e6e49cdc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 </head>
 
 <body scrolling="no">
@@ -145,7 +146,8 @@
 
   <script>
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      alert("手机浏览效果不佳，下次建议使用电脑访问");
+      alert("手机浏览效果不佳，下次建议使用电脑访问哦！");
+      document.getElementById('phone').innerHTML = '手机浏览效果不佳，下次建议使用电脑访问哦！';
     };
 
     function countDown() {
@@ -159,9 +161,6 @@
     //1000毫秒调用一次
     window.setInterval("countDown()", 1000);
 
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      document.getElementById('phone').innerHTML = '手机浏览效果不佳，建议使用电脑访问'
-    };
   </script>
 
 </body>
