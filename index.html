@@ -1,296 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<!-- 统计后 跳转 -->
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
-  <title>正式页面</title>
-  <style>
-    html,
-    body,
+  <title>Joyan</title>
 
-    #container {
-      width: 100%;
-      height: 100%;
-      margin: 0px;
-      padding: 0px;
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?630a3bc130d157e9583cbe17e6e49cdc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  <style media="screen">
+    body {
+      background-color: #2980b9;
     }
 
-    .amap-ui-control-layer .iconfont {
-      margin-right: 0px !important
-    }
-
-    .btn-show {
-      display: inline-block;
-      font-weight: 400;
+    img {
+      margin: auto;
+      border-radius: 100%;
+      width: 100px;
+      padding: 6px;
       text-align: center;
-      white-space: nowrap;
       vertical-align: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      border: 1px solid transparent;
-      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-      background-color: transparent;
-      background-image: none;
-      color: rgba(114, 124, 245, 1);
-      border-color: rgba(114, 124, 245, 1);
-      padding: .25rem .5rem;
-      line-height: 1.5;
-      border-radius: 1rem;
-      -webkit-appearance: button;
-      cursor: pointer;
     }
 
-    .btn-show:hover {
+    p {
+      font-size: 12px;
+      font-family: Sans-serif;
       color: #fff;
-      background-color: rgba(114, 124, 245, 1);
-      border-color: rgba(114, 124, 245, 1);
+      margin-top: 16px;
+      text-align: center;
     }
 
-    .btn-show:hover {
-      text-decoration: none;
-    }
-
-    .btn-show:focus {
-      outline: 0;
-      box-shadow: none;
-    }
-
-    /* 弹出选卡 */
-    .input-card-rs {
+    .all {
       display: flex;
       flex-direction: column;
-      min-width: 0;
-      word-wrap: break-word;
-      background-color: #fff;
-      background-clip: border-box;
-      border-radius: .25rem;
-      width: 22rem;
-      border-width: 0;
-      border-radius: 0.4rem;
-      box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
-      position: fixed;
-      /* 菜单相对页面位置 */
-      bottom: 5rem;
-      right: 2rem;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      padding: 0.75rem 1.25rem;
-      /* 默认不显示 */
-      display: none;
+      position: absolute;
+      left: 50%;
+      top: 25%;
+      transform: translate(-50%, 0%);
     }
 
-    /* 菜单按钮 */
-    .input-card-btn {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      word-wrap: break-word;
-      background-color: #fff;
-      background-clip: border-box;
-      border-radius: .25rem;
-      width: 22rem;
-      border-width: 0;
-      border-radius: 10rem;
-      box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
-      position: fixed;
-      /* 菜单按钮相对页面位置 */
-      bottom: 2rem;
-      right: 2rem;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      padding: 0rem;
+    .co {
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 2px solid #fff;
     }
 
-    .input-item2 {
-      position: relative;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-      -ms-flex-align: center;
-      align-items: center;
-      width: 100%;
+    .spinner {
+      margin: 0 auto;
+      width: 500px;
+      /*50*/
+      height: 60px;
+      text-align: center;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+
+    .spinner>div {
+      background-color: #fff;
       height: 100%;
+      width: 6px;
+      display: inline-block;
+
+      -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+      animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+      -webkit-animation-delay: -1.1s;
+      animation-delay: -1.1s;
+    }
+
+    .spinner .rect3 {
+      -webkit-animation-delay: -1.0s;
+      animation-delay: -1.0s;
+    }
+
+    .spinner .rect4 {
+      -webkit-animation-delay: -0.9s;
+      animation-delay: -0.9s;
+    }
+
+    .spinner .rect5 {
+      -webkit-animation-delay: -0.8s;
+      animation-delay: -0.8s;
+    }
+
+    @-webkit-keyframes sk-stretchdelay {
+
+      0%,
+      40%,
+      100% {
+        -webkit-transform: scaleY(0.4)
+      }
+
+      20% {
+        -webkit-transform: scaleY(1.0)
+      }
+    }
+
+    @keyframes sk-stretchdelay {
+
+      0%,
+      40%,
+      100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+      }
+
+      20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+      }
     }
   </style>
-
 </head>
 
-<body>
-  <!-- 地图容器 -->
-  <div id="container"></div>
-
-  <!-- 信息卡 -->
-
-  <!-- 点击选卡 -->
-  <div class="input-card-rs" id="show-rs" style="width: auto">
-    <h4>控制地图显示范围</h4>
-    <div class="input-item">
-      <button class="btn" id="piexBtn">平移像素值：(50,100)</button>
+<body scrolling="no">
+  <div class="all">
+    <div class="co">
+      <img src="https://avaimg.nosdn.127.net/img/L2JPbS83QjFuWWsra2FVY0pya29CLytMSUNldGxIRTVvaEpwOGgvZXo1WXdNZ3dub2I4SjBRPT0.jpg?imageView&thumbnail=128x128&quality=90&type=jpg">
     </div>
-    <div class="input-item">
-      <button class="btn" id="pantoBtn">地图中心点平移至：(116.405467,39.907761)</button>
-    </div>
-    <div class="input-item">
-      <button class="btn" id="reset-bounds">指定地图显示范围</button>
-    </div>
-  </div>
-  <!-- 菜单按钮 -->
-  <div class="input-card-btn" style="width: auto">
-    <div class="input-item2">
-      <button class="btn-show" id="show-btn">
-        <p>&ensp;菜单&ensp;</p>
-      </button>
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+      <br>
+      <p>L o a d i n g . . . </p>
+      <p id="Time">3</p>
+      <p id="phone"></p>
     </div>
   </div>
 
-
-  <!-- 加载地图JSAPI脚本 -->
-  <script src="https://webapi.amap.com/maps?v=1.4.15&key=5d734c342da6acb3de3ebdc017ca2e32"></script>
-  <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
-  <!-- UI组件库 1.0 -->
-  <script src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
-
-  <!-- 定义脚本 -->
   <script>
-    //初始化地图
-    var map = new AMap.Map('container', {
-      zoom: 17, //初始化地图层级
-      center: [116.397428, 39.90923], //初始化地图中心点
-      pitch: 0, //仰角
-      rotation: 0, //旋转视角
-      expandZoomRange: true, //缩放控制
-      zooms: [3, 20],
-      viewMode: '3D', //开启3D视图,默认为关闭
-      buildingAnimation: true, //楼块出现是否带动画
-      showIndoorMap: false, // 是否在有矢量底图的时候自动展示室内地图，PC默认true,移动端默认false
-      doubleClickZoom: true, // 地图是否可通过双击鼠标放大地图，默认为true
-      resizeEnable: true, //是否监控地图容器尺寸变化，默认值为false
-      rotateEnable: true,
-      pitchEnable: true,
-      //zoomEnable: true, //地图是否可缩放，默认值为true
-      features: ['bg', 'road', 'point'],
-      mapStyle: 'amap://styles/light',
-    });
-
-    //其他插件载入
-    /*AMap.plugin([
-        'AMap.ToolBar',//工具条
-        'AMap.Scale',//比例尺
-        'AMap.OverView',//鹰眼控件
-        'AMap.MapType',//卫星切换控件
-        'AMap.Geolocation',//定位控件
-        'AMap.ControlBar', //3D 罗盘控制
-      ],
-      function() {
-        //其他控件添加
-        map.addControl(new AMap.ToolBar());//工具条
-        map.addControl(new AMap.Scale());//比例尺
-        map.addControl(new AMap.OverView({isOpen:false}));//鹰眼
-        map.addControl(new AMap.MapType());//图层切换
-        map.addControl(new AMap.Geolocation());//定位
-        map.addControl(new AMap.ControlBar({ // 添加 3D 罗盘控制
-        showZoomBar: false, //缩放按钮
-        showControlButton: true, //罗盘
-        position: { //位置
-        right: '10px',
-        top: '10px',
-        }
-        }));
-      });*/
-
-    //载入UI控件，参考：https://lbs.amap.com/api/javascript-api/reference-amap-ui/control/basiccontrol
-    AMapUI.loadUI(['control/BasicControl'], function(BasicControl) {
-      //图层切换控件
-      map.addControl(new BasicControl.LayerSwitcher({
-        theme: 'light',
-        position: 'lt', //图标位置
-        //自定义基础图层
-        baseLayers: [
-          //第一层基础图层
-          {
-            enable: true,
-            id: 'tile', //图层id，需唯一
-            name: '标准图', //显示名称，html
-            layer: new AMap.TileLayer({
-              zooms: [3, 20],
-            })
-          },
-          //第二层基础图层
-          {
-            id: 'satellite',
-            name: '卫星图',
-            layer: new AMap.TileLayer.Satellite({
-              zooms: [3, 20],
-            })
-          }
-        ],
-
-        //自定义覆盖图层
-        overlayLayers: [
-          //第一层覆盖图层
-          {
-            enable: true,
-            id: 'buildings',
-            name: '建筑',
-            layer: new AMap.Buildings({
-              zooms: [15, 20],
-              //opacity: 0.8, //建筑透明度
-              //heightFactor: 2 //N倍于默认高度，3D下有效
-            })
-          },
-
-          //第二层覆盖图层
-          {
-            id: 'roadNet',
-            name: '路网',
-            layer: new AMap.TileLayer.RoadNet()
-          },
-
-          //第三层覆盖图层
-          {
-            id: 'traffic',
-            name: '路况',
-            layer: new AMap.TileLayer.Traffic()
-          },
-
-          //第三层覆盖图层
-          {
-            id: 'points',
-            name: '标注',
-            layer: new AMap.TileLayer.Traffic()
-          },
-        ]
-      }));
-    });
-
-    //菜单
-    window.onload = function() {
-      var btn = document.getElementById('show-btn');
-      var oCon = document.getElementById('show-rs').style;
-      btn.onclick = function() {
-        oCon.display = oCon.display == 'block' ? 'none' : 'block';
-      }
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      alert("手机浏览效果不佳，下次建议使用电脑访问");
     };
 
-    //点击选卡
-    AMap.event.addDomListener(document.getElementById('piexBtn'), 'click', function() {
-      map.panBy(50, 100);
-    });
-    AMap.event.addDomListener(document.getElementById('pantoBtn'), 'click', function() {
-      map.panTo([116.405467, 39.907761]);
-    }); //移动到，绑定按钮事件
-    AMap.event.addDomListener(document.getElementById('reset-bounds'), 'click', function() {
-      var mybounds = new AMap.Bounds([116.109266, 39.948756], [116.104835, 39.94503]);
-      map.setBounds(mybounds);
-      log.success("成功移动至指定范围"); //弹窗提示
-    }); //缩放到，绑定按钮事件，获取视野：https://lbs.amap.com/api/javascript-api/example/map/map-bounds
+    function countDown() {
+      var time = document.getElementById("Time");
+      if (time.innerHTML == 0) {
+        window.location.href = "https://joyanw.lofter.com/";
+      } else {
+        time.innerHTML = time.innerHTML - 1;
+      }
+    };
+    //1000毫秒调用一次
+    window.setInterval("countDown()", 1000);
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      document.getElementById('phone').innerHTML = '手机浏览效果不佳，建议使用电脑访问'
+    };
   </script>
+
 </body>
 
 </html>
