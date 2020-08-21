@@ -29,11 +29,6 @@
       margin-top: 16px;
       text-align: center;
     }
-    
-    h2 {
-      font-family: Sans-serif;
-      color: #fff;
-    }
 
     .all {
       display: flex;
@@ -143,22 +138,22 @@
       <div class="rect4"></div>
       <div class="rect5"></div>
       <br>
-      <p><h2>小王的非工作空间</h2></p>
-      <p>即将进入……<span  id="Time">3</span></p>
+      <p>L o a d i n g . . . </p>
+      <p>加载完成……<span  id="Time">3</span></p>
       <p id="phone"></p>
     </div>
   </div>
 
   <script>
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      /*alert("手机浏览效果不佳，下次建议使用电脑访问哦！");*/
+      alert("手机浏览效果不佳，下次建议使用电脑访问哦！");
       document.getElementById('phone').innerHTML = '手机浏览效果不佳，下次建议使用电脑访问哦！';
     };
 
     function countDown() {
       var time = document.getElementById("Time");
       if (time.innerHTML == 0) {
-        window.location.href = "https://baidu.com/";
+        window.location.href = "https://joyanw.lofter.com/";
       } else {
         time.innerHTML = time.innerHTML - 1;
       }
